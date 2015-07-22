@@ -21,15 +21,19 @@ $.fn.ajaxTabs = function (prop) {
 
         /**
          * Callback function called before the ajax call
+         * @param tab: the tab selected
+         * @param wrapper: the wrapper associated
          */
-        'beforeCallback': function () {
+        'beforeCallback': function (tab, wrapper) {
             $('html,body').css('cursor', 'progress');
         },
 
         /**
          * Callback function called after the ajax call
+         * @param tab: the tab selected
+         * @param wrapper: the wrapper associated
          */
-        'afterCallback': function () {
+        'afterCallback': function (tab, wrapper) {
             $('html,body').css('cursor', 'default');
         }
     }, prop);
@@ -44,8 +48,9 @@ $.fn.ajaxTabs = function (prop) {
         $(this).find(properties.selectorTab).on('click', function (e) {
             e.preventDefault();
 
-            var url = $(this).data(properties.attrDataUrl);
-            var href = $(this).attr('href');
+            var tab = $(this);
+            var url = tab.data(properties.attrDataUrl);
+            var href = tab.attr('href');
             var wrapper = $(href);
 
             // Hide all wrappers
@@ -61,16 +66,14 @@ $.fn.ajaxTabs = function (prop) {
                 throw '"' + href + '" is not in the DOM !';
             } else if (wrapper.is(':empty')) {
                 // First loading
-                $.ajax({
-                    url: url,
-                    beforeSend: properties.beforeCallback
-                })
+                properties.beforeCallback(tab, wrapper);
+                $.ajax(url)
                     .done(function (data) {
                         // Set the data in the wrapper
                         wrapper.html(data);
                         // Display the wrapper
                         wrapper.addClass('active');
-                        properties.afterCallback();
+                        properties.afterCallback(tab, wrapper);
                     })
                     .fail(function (jqXHR, textStatus, errorThrown) {
                         throw 'Error while loading "' + url + '"';
