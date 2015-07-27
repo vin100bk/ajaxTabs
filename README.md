@@ -60,8 +60,8 @@ $(function() {
 
 ```html
 <ul id="myTabs">
-	<li><a href="#container1" data-lighttab-url="test1.html" class="tab">Tab 1</a></li>
-	<li><a href="#container2" data-lighttab-url="test2.html" class="tab">Tab 2</a></li>
+	<li><a href="#container1" data-lighttab-url="/container1Url class="tab">Tab 1</a></li>
+	<li><a href="#container2" data-lighttab-url="/container2Url" class="tab">Tab 2</a></li>
 	<li><a href="http://anywhere.com">Tab 3</a></li>
 </ul>
 
@@ -85,9 +85,9 @@ $(function() {
 
 ```html
 <ul id="myTabs">
-	<li><a href="#container1" data-url="test1.html">Tab 1</a></li>
-	<li><a href="#container2" data-url="test2.html">Tab 2</a></li>
-	<li><a href="#container3" data-url="test3.html">Tab 3</a></li>
+	<li><a href="#container1" data-url="/container1Url>Tab 1</a></li>
+	<li><a href="#container2" data-url="/container2Url">Tab 2</a></li>
+	<li><a href="#container3" data-url="/container3Url">Tab 3</a></li>
 </ul>
 ```
 
