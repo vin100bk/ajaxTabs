@@ -78,6 +78,7 @@ $.fn.ajaxTabs = function (prop) {
                         properties.afterCallback(tab, container);
                     })
                     .fail(function (jqXHR, textStatus, errorThrown) {
+                        properties.afterCallback(tab, container);
                         throw 'Error while loading "' + url + '"';
                     });
             } else {
