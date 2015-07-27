@@ -1,5 +1,5 @@
 /**
- * ajaxTabs is a very lightweight jquery plugin which allows to build tabs very easily
+ * ajaxTabs is a very lightweight jquery plugin which allows building tabs very easily
  * @param prop
  * @returns {*}
  */
@@ -22,19 +22,17 @@ $.fn.ajaxTabs = function (prop) {
         /**
          * Callback function called before the ajax call
          * @param tab: the tab selected
-         * @param wrapper: the wrapper associated
+         * @param container: the container associated
          */
-        'beforeCallback': function (tab, wrapper) {
-            $('html,body').css('cursor', 'progress');
+        'beforeCallback': function (tab, container) {
         },
 
         /**
          * Callback function called after the ajax call
          * @param tab: the tab selected
-         * @param wrapper: the wrapper associated
+         * @param container: the container associated
          */
-        'afterCallback': function (tab, wrapper) {
-            $('html,body').css('cursor', 'default');
+        'afterCallback': function (tab, container) {
         }
     }, prop);
 
@@ -51,36 +49,40 @@ $.fn.ajaxTabs = function (prop) {
             var tab = $(this);
             var url = tab.data(properties.attrDataUrl);
             var href = tab.attr('href');
-            var wrapper = $(href);
+            var container = $(href);
 
-            // Hide all wrappers
-            wrapper.siblings().removeClass('active');
+            // Hide all containers
+            container.siblings().removeClass('active');
 
             // Set the tab as active
             var li = $(this).parent();
             li.siblings().removeClass('active');
             li.addClass('active');
 
-            if (wrapper.length == 0) {
+            if (container.length == 0) {
                 // Wrapper does not exist
                 throw '"' + href + '" is not in the DOM !';
-            } else if (wrapper.is(':empty')) {
+            } else if (container.is(':empty')) {
+                if(!url) {
+                    throw '"data-' + properties.attrDataUrl + '" is not set !';
+                }
+
                 // First loading
-                properties.beforeCallback(tab, wrapper);
+                properties.beforeCallback(tab, container);
                 $.ajax(url)
                     .done(function (data) {
-                        // Set the data in the wrapper
-                        wrapper.html(data);
-                        // Display the wrapper
-                        wrapper.addClass('active');
-                        properties.afterCallback(tab, wrapper);
+                        // Set the data in the container
+                        container.html(data);
+                        // Display the container
+                        container.addClass('active');
+                        properties.afterCallback(tab, container);
                     })
                     .fail(function (jqXHR, textStatus, errorThrown) {
                         throw 'Error while loading "' + url + '"';
                     });
             } else {
                 // Content has already been loaded, just display it
-                wrapper.addClass('active');
+                container.addClass('active');
             }
         });
 
