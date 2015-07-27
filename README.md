@@ -1,5 +1,5 @@
 # ajaxTabs
-AjaxTabs is a very lightweight jquery plugin which allows building tabs very easily. Tons of similar plugins already exist but I think those plugins are too much heavy for just making tabs.
+ajaxTabs is a very lightweight jquery plugin which allows building tabs very easily. Tons of similar plugins already exist but I think those plugins are too much heavy for just making tabs.
 
 ## Getting started
 ### HTML
