@@ -21,6 +21,12 @@ ajaxTabs is a very lightweight jquery plugin which allows building tabs very eas
 </div>
 ```
 
+If you want to enable one tab by default, just do it by this way
+
+```html
+<div id="container1" class="active"></div>
+```
+
 ### CSS
 ```css
 .tab-wrapper > * {
